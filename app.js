@@ -104,7 +104,9 @@ function comparison (weight, humanWeight, height, humanHeight, diet, humanDiet) 
 // Populate screen when clear
 function populate() {
     let dinos = dinoData();
-    dinos.forEach (function() {new Dino(dinos.species, dinos.weight, dinos.height, dinos.diet, dinos.fact)});
+    dinos.forEach (() => {
+        new Dino(dinos.species, dinos.weight, dinos.height, dinos.diet, dinos.fact)
+    });
     const human = (function () {
         const name = document.getElementById('name').value;
         const height = document.getElementById('feet').value * 12 + document.getElementById('inches').value;
