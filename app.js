@@ -74,20 +74,20 @@ class Human {
 
 // Comparison functions
 function compSpecies (species, humanSpecies) {
-        return (species === humanSpecies) ? "Sue your parents for nameing you like a dinosaur :D"
-           : (species < humanSpecies) ? `Your name appears first in the dictionary`
-           : `Your name appears after the dino's name in the dictionary`;
+    return (species === humanSpecies) ? "Sue your parents for naming you like a dinosaur :D"
+        : (species < humanSpecies) ? "Your name appears first in the dictionary."
+        : "Your name appears after the dino's name in the dictionary";
 }
 
 function compWeight (weight, humanWeight) {
-        return (weight - humanWeight === 0) ? `You both have the same weight.`
-           : (weight - humanWeight > 0) ? `The dino is heavier than you.`
-           : `This dino is lighter than you.`;
+    return (weight - humanWeight === 0) ? "You both have the same weight."
+        : (weight - humanWeight > 0) ? "The dino is heavier than you."
+        : "This dino is lighter than you.";
 }
 
 function compDiet (diet, humanDiet) {
-        return (diet === humanDiet) ? `This dino is a ${diet}, just like you.`
-           : `In contrast to you, this dino is a ${diet}.`;
+    return (diet === humanDiet) ? `This dino is a ${diet}, just like you.`
+        : `In contrast to you, this dino is a ${diet}.`;
 }
 
 // Choose random attribute to compare
@@ -118,28 +118,26 @@ function createDinos() {
     dinos.splice(4, 0, human);
 }
 
-// Prepare grid information
+// Build grid
 function grid() {
     dinos.forEach((dino, i) => {
         const grid = document.getElementById('grid');
         const div = document.createElement('div');
+        div.classList.add('grid-item');
+        grid.appendChild(div);
         const name = document.createElement('h4');
         name.innerHTML = dino.species;
+        div.appendChild(name);
         const image = document.createElement('img');
         image.setAttribute('src', `/images/${dino.species.toLowerCase()}.png`);
-        const fact = document.createElement('p');
-        fact.innerHTML = comparison(dino.species, human.species, dino.weight, human.weight, dino.diet, human.diet);
-
-// Change image and fact for human and pigeon
-        if (i === 4) { image.setAttribute('src', `/images/human.png`); fact.innerHTML = "You!"; }
-        if (i === 8) { image.setAttribute('src', `/images/pigeon.png`); fact.innerHTML = "All birds are Dinosaurs."; }
-
-// Build the grid
-        div.classList.add('grid-item');
-        div.appendChild(name);
-        div.appendChild(fact);
         div.appendChild(image);
-        grid.appendChild(div);
+
+// Prepare facts and change image and fact for human and pigeon
+        const fact = document.createElement('p');
+        div.appendChild(fact);
+        fact.innerHTML = comparison(dino.species, human.species, dino.weight, human.weight, dino.diet, human.diet);
+        if (i === 4) { image.setAttribute('src', `/images/human.png`); fact.innerHTML = "You!"; }
+        if (i === 8) { image.setAttribute('src', `/images/pigeon.png`); fact.innerHTML = "All birds are Dinosaurs."; }   
     });
 }
 
