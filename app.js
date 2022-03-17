@@ -128,11 +128,11 @@ function grid() {
         const name = document.createElement('h4');
         name.innerHTML = dino.species;
         div.appendChild(name);
+
+// Prepare facts and change image and fact for human and pigeon
         const image = document.createElement('img');
         image.setAttribute('src', `/images/${dino.species.toLowerCase()}.png`);
         div.appendChild(image);
-
-// Prepare facts and change image and fact for human and pigeon
         const fact = document.createElement('p');
         div.appendChild(fact);
         fact.innerHTML = comparison(dino.species, human.species, dino.weight, human.weight, dino.diet, human.diet);
