@@ -53,7 +53,7 @@ function dinoData() {
     return dinosaurs;
 }
 
-// Constructors
+// Constructor for the dinos
 class Dino {
     constructor (species, weight, diet, fact) {
         this.species = species;
@@ -63,6 +63,7 @@ class Dino {
     }  
 }
 
+// Constructor for the human
 class Human {
     constructor (species, weight, diet, fact) {
         this.species = species;
@@ -72,19 +73,21 @@ class Human {
     }  
 }
 
-// Comparison functions
+// Comparison 1: name equality and alphabetical order
 function compSpecies (species, humanSpecies) {
     return (species === humanSpecies) ? "Sue your parents for naming you like a dinosaur :D"
         : (species < humanSpecies) ? "Your name appears first in the dictionary."
         : "Your name appears after the dino's name in the dictionary";
 }
 
+// Comparison 2: weight
 function compWeight (weight, humanWeight) {
     return (weight - humanWeight === 0) ? "You both have the same weight."
         : (weight - humanWeight > 0) ? "The dino is heavier than you."
         : "This dino is lighter than you.";
 }
 
+// Comparison 3: diet
 function compDiet (diet, humanDiet) {
     return (diet === humanDiet) ? `This dino is a ${diet}, just like you.`
         : `In contrast to you, this dino is a ${diet}.`;
@@ -114,7 +117,7 @@ function createDinos() {
         return new Human(name, weight, diet);
     })();
 
-// Put human in the middle of the grid
+    // Put human in the middle of the grid
     dinos.splice(4, 0, human);
 }
 
@@ -129,21 +132,25 @@ function grid() {
         name.innerHTML = dino.species;
         div.appendChild(name);
 
-// Prepare facts and change image and fact for human and pigeon
+// Prepare facts
         const image = document.createElement('img');
         image.setAttribute('src', `/images/${dino.species.toLowerCase()}.png`);
         div.appendChild(image);
         const fact = document.createElement('p');
         div.appendChild(fact);
         fact.innerHTML = comparison(dino.species, human.species, dino.weight, human.weight, dino.diet, human.diet);
-        if (i === 4) { image.setAttribute('src', `/images/human.png`); fact.innerHTML = "You!"; }
+        
+        // change image and fact for human and pigeon
+        if (i === 4) { image.setAttribute('src', `/images/human.png`); fact.innerHTML = " "; }
         if (i === 8) { image.setAttribute('src', `/images/pigeon.png`); fact.innerHTML = "All birds are Dinosaurs."; }   
     });
 }
 
-// Clear menu and call follow-up functions
+// Clear menu
 function compare() {
     document.getElementById('dino-compare').style.display = "none";
+    
+    // call follow-up functions
     createDinos();
     grid();
 }
